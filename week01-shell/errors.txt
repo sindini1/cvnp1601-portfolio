@@ -1,0 +1,19 @@
+2026-08-30T23:14:32.742587+00:00 cvnp1601-lab multipathd[486]: uevent trigger error
+2026-08-30T23:14:32.751645+00:00 cvnp1601-lab systemd[1]: apport-autoreport.path - Process error reports when automatic reporting is enabled (file watch) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+2026-08-30T23:14:32.751654+00:00 cvnp1601-lab systemd[1]: apport-autoreport.timer - Process error reports when automatic reporting is enabled (timer based) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+2026-08-30T23:14:32.779249+00:00 cvnp1601-lab kernel: RAS: Correctable Errors collector initialized.
+2026-08-30T23:14:33.075857+00:00 cvnp1601-lab snapd[1084]: helpers.go:190: error trying to compare the snap system key: system-key missing on disk
+2026-08-30T23:14:35.861376+00:00 cvnp1601-lab multipathd[486]: uevent trigger error
+2026-08-30T23:14:45.866530+00:00 cvnp1601-lab multipathd[486]: uevent trigger error
+2026-08-30T23:14:55.871666+00:00 cvnp1601-lab multipathd[486]: uevent trigger error
+2026-08-30T23:23:11.344526+00:00 cvnp1601-lab multipathd[481]: uevent trigger error
+2026-08-30T23:23:11.346446+00:00 cvnp1601-lab systemd[1]: apport-autoreport.path - Process error reports when automatic reporting is enabled (file watch) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+2026-08-30T23:23:11.346475+00:00 cvnp1601-lab systemd[1]: apport-autoreport.timer - Process error reports when automatic reporting is enabled (timer based) was skipped because of an unmet condition check (ConditionPathExists=/var/lib/apport/autoreport).
+2026-08-30T23:23:11.374852+00:00 cvnp1601-lab kernel: RAS: Correctable Errors collector initialized.
+2026-08-30T23:23:19.421396+00:00 cvnp1601-lab multipathd[481]: uevent trigger error
+2026-08-30T23:23:29.424842+00:00 cvnp1601-lab multipathd[481]: uevent trigger error
+2026-08-30T23:23:39.428865+00:00 cvnp1601-lab multipathd[481]: uevent trigger error
+2026-08-30T23:14:32.751251+00:00 cvnp1601-lab kernel: Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.
+2026-08-30T23:14:33.103353+00:00 cvnp1601-lab snapd[1084]: autorepair.go:177: WARNING: the system booted with an old initrd without unlocked status reporting
+2026-08-30T23:23:11.359554+00:00 cvnp1601-lab kernel: Speculative Return Stack Overflow: WARNING: See https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html for mitigation options.
+2026-08-30T23:23:13.257371+00:00 cvnp1601-lab snapd[823]: autorepair.go:177: WARNING: the system booted with an old initrd without unlocked status reporting
