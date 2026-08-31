@@ -1,0 +1,1 @@
+2>/dev/null sends error messages (stderr) to a black hole so they don’t print. find still works, you just don’t see “Permission denied.” Those denials usually mean the system is blocking your user from private paths, not that the command failed. Without the redirect, the same search is harder to read because the real matches get mixed with errors.

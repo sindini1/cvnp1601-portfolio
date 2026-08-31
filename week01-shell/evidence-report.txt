@@ -1,0 +1,14 @@
+CVNP1601 Week 1 evidence report
+Ran: Mon Aug 31 01:06:54 AM UTC 2026
+
+FOUND  week1-cheatsheet.txt
+FOUND  errors.txt
+FOUND  week1-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  CVNP1601-W01-CHECKPOINT04-SHELLMAP
+FOUND  CVNP1601-W01-CHECKPOINT07-LOGTRACE
+FOUND  README.md (repo root)
+FOUND  screenshots
+
+Done.
