@@ -1,0 +1,58 @@
+pwd
+What: print working directory
+Example: pwd
+Note: always run this before a screenshot so location is proven
+
+ls
+What: list files
+Flags: -l long, -h human sizes, -a include hidden
+Example: ls -lh /var/log
+Note: read permissions before you touch a file
+
+cd
+What: change directory
+Example: cd /var/log    cd ~    cd ..    cd -
+Note: cd etc fails from home because that is relative. Use /etc
+
+find
+What: search by name from a starting path
+Example: find /etc -name "*.conf" 2>/dev/null | head -10
+Note: Permission denied is often the system protecting files, not a broken command
+
+grep
+What: search text inside a file
+Flags: -i ignore case
+Example: grep -i "error" /var/log/syslog
+Note: you are filtering evidence, not deleting anything
+
+head
+What: show the first lines
+Flags: -20 first 20 lines
+Example: grep -i "error" /var/log/syslog | head -20
+Note: keeps huge logs readable
+
+wc
+What: count
+Flags: -l count lines
+Example: wc -l /var/log/syslog
+Note: use it to prove how much you found
+
+pipe |
+What: send output of one command into the next
+Example: grep -i "error" /var/log/syslog | wc -l
+Note: left command runs first
+
+redirection >
+What: write output to a file, overwrite if it exists
+Example: grep -i "error" /var/log/syslog > errors.txt
+Risk: can wipe a file you still needed
+
+append >>
+What: add output to the end of a file
+Example: grep -i "warning" /var/log/syslog >> errors.txt
+Note: use this when you want to keep old evidence
+
+stderr suppression 2>/dev/null
+What: hide error messages
+Example: find /etc -name "*.conf" 2>/dev/null
+Note: denials are still happening, you just are not printing them
