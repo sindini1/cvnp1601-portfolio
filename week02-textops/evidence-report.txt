@@ -1,0 +1,14 @@
+CVNP1601 Week 2 evidence report
+Ran: Wed Sep  9 02:28:21 AM UTC 2026
+
+FOUND  server-note.txt
+FOUND  quick-edit.txt
+FOUND  access-report.txt
+FOUND  week1-cheatsheet.txt
+FOUND  week2-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+FOUND  screenshots
+
+Done.

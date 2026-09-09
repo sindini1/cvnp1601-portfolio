@@ -1,0 +1,3 @@
+Checked SSH notes on web02.
+Need a short access summary from auth.log.
+Follow up after the report is saved.

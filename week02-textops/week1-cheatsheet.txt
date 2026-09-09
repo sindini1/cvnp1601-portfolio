@@ -1,0 +1,37 @@
+=== Week 2 ===
+
+vim
+What: terminal editor with modes
+Commands: i insert, Esc normal, :w save, :wq save and quit, :q! quit without saving, /Status search, dd delete line, u undo
+Risk: :wq saves whatever is on screen. Use :q! if the edit is wrong.
+
+nano
+What: simpler terminal editor
+Commands: Ctrl+O save, Ctrl+X exit
+Note: better for a short note when you do not want vim modes
+
+grep -r
+What: search a directory tree
+Example: grep -r "PermitRootLogin" /etc/ssh/ 2>/dev/null
+
+grep -v
+What: drop matching lines
+Example: grep -v "^#" /etc/ssh/sshd_config
+
+grep -iE
+What: extended search, ignore case
+Example: grep -iE "error|warning" /var/log/syslog | head -10
+
+awk '{print $N}'
+What: print field N
+Example: grep "Accepted password" /var/log/auth.log | awk '{print $1, $2, $3, $9}'
+
+awk -F:
+What: split on colon
+Example: awk -F: '{print $1, $7}' /etc/passwd
+
+uniq -c
+What: count adjacent duplicate lines
+Example: sort src-ips.txt | uniq -c | sort -rn
+Risk: without sort first, repeats do not group
+
