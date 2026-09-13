@@ -1,0 +1,11 @@
+CVNP1601 Week 3 evidence report
+Ran: Sun Sep 13 11:49:29 PM UTC 2026
+
+FOUND  provisioning-summary.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  week3-diagnosis.md
+FOUND  README.md (repo root)
+FOUND  screenshots
+
+Done.
