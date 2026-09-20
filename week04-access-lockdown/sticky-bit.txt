@@ -1,0 +1,4 @@
+drwxrwxr-t 2 sindini developers 4096 Sep 20 20:20 /project
+-rw-rw-r-- 1 alice alice 11 Sep 20 20:20 /project/alice-file.txt
+rm: cannot remove '/project/alice-file.txt': Operation not permitted
+-rw-rw-r-- 1 alice alice 11 Sep 20 20:20 /project/alice-file.txt
