@@ -9,7 +9,7 @@ Edited a server note in vim, wrote a short nano note, pulled active SSH settings
 
 Provisioned a Linux user, added targeted group membership, and granted one sudo command without giving full root access.
 
-Locked down a shared /project directory with the sticky bit, SGID, and a named ACL for a contractor instead of chmod 777. Diagnosed why SUID on a backup script does not grant root.
+I configured a shared Linux directory with sticky bit, SGID, and ACLs so team access is collaborative without giving unnecessary delete or write rights. I also documented why SUID on a backup script does not grant root.
 
 ## AI use
 I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did.
