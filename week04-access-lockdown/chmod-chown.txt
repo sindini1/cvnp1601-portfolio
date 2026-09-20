@@ -1,0 +1,3 @@
+-rw-rw-r-- 1 sindini sindini 0 Sep 20 20:17 /home/sindini/deploy.sh
+-rwxr-x--- 1 sindini sindini 0 Sep 20 20:17 /home/sindini/deploy.sh
+drwxrwxr-x 2 sindini developers 4096 Sep 20 19:39 /project
