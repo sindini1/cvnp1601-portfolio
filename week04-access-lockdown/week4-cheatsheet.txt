@@ -1,0 +1,54 @@
+Week 4 cheatsheet  permissions, ACLs, special bits
+
+ls -la string
+  pos 1  - file  d directory  l symlink
+  2-4    owner rwx
+  5-7    group rwx
+  8-10   other rwx
+  trailing + means an ACL is present. run getfacl.
+
+octal
+  r=4 w=2 x=1
+  7=rwx  6=rw-  5=r-x  4=r--  0=---
+  chmod 750 file    owner rwx, group r-x, other none
+  chmod 1775 dir    sticky bit plus 775
+
+symbolic
+  chmod g+w /project
+  chmod o-r file.txt
+  chmod +t /project     sticky
+  chmod g+s /project    SGID
+  chmod u+s binary      SUID (binaries only)
+
+special bits in ls -la
+  sticky  t or T   other execute slot    only owner/root can delete
+  SGID    s or S   group execute slot    new files inherit dir group
+  SUID    s or S   owner execute slot    binary runs as file owner
+  lowercase = special bit AND execute
+  uppercase = special bit WITHOUT execute (usually a mistake)
+
+ownership
+  chown alice:developers /project
+  chgrp developers /project
+  chown -R recurses. verify with ls -ld
+
+umask
+  umask                 print current value
+  umask 0022            strip write from group and other
+  file base 666 - 022 = 644
+  dir  base 777 - 022 = 755
+
+ACL
+  getfacl /project
+  setfacl -m u:carlos:r-x /project
+  setfacl -d -m g:developers:rw /project
+  setfacl -x u:carlos /project
+  setfacl -b /project
+  setfacl -R ...
+  mask:: caps named user and named group effective perms, not owner/other
+  default: entries are inherited by new files
+
+why not these
+  chmod 777             every account gets rwx
+  usermod -aG for a week-long contractor
+  chmod u+s script.sh   kernel ignores SUID on #! files
