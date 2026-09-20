@@ -1,0 +1,16 @@
+CVNP1601 Week 4 evidence report
+Ran: Sun Sep 20 09:11:51 PM UTC 2026
+
+FOUND  permission-audit.txt
+FOUND  permission-breakdown.md
+FOUND  access-lockdown-summary.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  week4-diagnosis.md
+FOUND  week4-cheatsheet.txt
+FOUND  CVNP1601-W04-CHECKPOINT04-PERMBITS
+FOUND  CVNP1601-W04-CHECKPOINT07-ACLCONFIG
+FOUND  README.md (repo root)
+FOUND  screenshots
+
+Done.
