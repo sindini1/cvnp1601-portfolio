@@ -1,0 +1,3 @@
+drwxrwsr-t 2 sindini developers 4096 Sep 20 20:30 /project
+-rw-rw-r-- 1 alice developers 6 Sep 20 20:30 /project/after-sgid.txt
+-rw-rw-r-- 1 alice alice      7 Sep 20 20:29 /project/before-sgid.txt
