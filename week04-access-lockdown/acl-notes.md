@@ -1,15 +1,15 @@
 # Task 5 notes
 
 ## When an ACL is better than a group
-Standard mode bits have one group slot. alice and bob already use developers for team write. Carlos needs read-only for one week. Adding him to developers would also give him write, and the membership would likely stay after the contract ends.
+Normal permissions only have one group slot. alice and bob already use developers for the team. Carlos only needs read for a week.
+If I added him to developers he would also get write, and somebody would probably forget to take him back out.
 
-A named user ACL grants only Carlos, only r-x, and setfacl -x removes it without touching the team group.
+setfacl -m u:carlos:r-x gave just Carlos read and enter. setfacl -x took it off without touching the team group.
 
-## What the audit file should show
-1. Baseline getfacl before any setfacl.
-2. user:carlos:r-x and a mask line after setfacl -m.
-3. default:group:developers:rw- after setfacl -d.
-4. getfacl on acl-test.txt inheriting that default group entry.
-5. After setfacl -x, user:carlos is gone from /project.
-
-ls -ld /project should show a trailing + while the named ACL exists.
+## What showed up in acl-audit.txt
+First getfacl was the baseline. No Carlos.
+After setfacl -m I got `user:carlos:r-x` and a mask line.
+After setfacl -d I got `default:group:developers:rw-`.
+acl-test.txt picked up that default group entry.
+After setfacl -x the Carlos line was gone.
+ls -ld still showed a `+` because the default ACL was still on the directory.

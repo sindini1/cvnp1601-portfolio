@@ -1,47 +1,28 @@
 # Task 1 written breakdown
 
-Strings taken from permission-audit.txt on cvnp1601-lab, Sep 20 2026.
+This is from permission-audit.txt on my lab VM.
 
 ## /etc/shadow
 `-rw-r----- 1 root shadow`
-- pos 1 `-` regular file
-- owner `rw-` root can read and write hashes
-- group `r--` shadow group can read
-- other `---` nobody else can read
-- no special bit, no `+`
-This file is sensitive. Other has no access so a normal account cannot copy hashes for offline cracking.
+It is a regular file. root can read and write it. The shadow group can read it. Everyone else is locked out.
+That matters because this file has the password hashes. If other could read it, anyone on the box could copy the hashes and try to crack them offline.
 
 ## /usr/bin/passwd
 `-rwsr-xr-x 1 root root`
-- pos 1 `-` regular file
-- owner `rws` read, write, and SUID in the owner execute slot
-- group `r-x` can run it
-- other `r-x` any user can run it
-- lowercase `s` means SUID and owner execute are both set
-A normal user can change their password because this binary runs as root. SUID on a script would be ignored.
+The `s` in the owner spot is SUID. Anyone can run passwd, but it runs as root so a normal user can change their own password.
+If this was a script instead of a binary, that SUID bit would not do anything.
 
 ## /tmp
-`drwxrwxrwt` (the `.` line under /tmp)
-- pos 1 `d` directory
-- owner `rwx`
-- group `rwx`
-- other `rwt` sticky bit in the other execute slot
-- lowercase `t` means sticky and other-execute are both set
-Anyone can create files in /tmp. The sticky bit stops a user from deleting someone else's file.
+`drwxrwxrwt`
+The `t` is the sticky bit. Anyone can drop files in /tmp. You can only delete your own files, not somebody else's.
 
 ## /project
-`drwxr-xr-x 2 root developers` (the `.` line under /project)
-- pos 1 `d` directory
-- owner `rwx` root
-- group `r-x` developers can enter and list, not write yet
-- other `r-x`
-- no sticky bit, no SGID, no `+`
-This is the before-state. Group write, sticky bit, SGID, and the Carlos ACL are not set yet.
+`drwxr-xr-x 2 root developers`
+This was the starting state after setup. root owns it. developers can enter and list it, but they could not write yet. No sticky bit, no SGID, no `+` for an ACL.
 
 ## umask
-Printed value: `0002`
-- leading 0 is the special-bits octet
-- 002 removes write from other only, group keeps write
-- new file base 666 - 002 = 664 (rw-rw-r--)
-- new directory base 777 - 002 = 775 (rwxrwxr-x)
-This is not 0022. Do not use the 644/755 math on this VM.
+My umask printed `0002`, not `0022`.
+0002 only strips write from other. Group still keeps write.
+New file: 666 - 002 = 664 (`rw-rw-r--`)
+New directory: 777 - 002 = 775 (`rwxrwxr-x`)
+I used those numbers, not the 644/755 example from class.

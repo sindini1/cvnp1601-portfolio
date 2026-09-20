@@ -1,10 +1,11 @@
 # Task 3 notes
 
 ## Why the sticky bit
-Write permission on a directory includes the right to delete files inside it, even files you do not own. /project is group-writable for developers, and alice and bob are both in that group. Without the sticky bit, bob can rm alice-file.txt.
+If a directory is group-writable, write also means you can delete files in it. alice and bob are both in developers, so without the sticky bit bob could delete alice-file.txt even though he does not own it.
 
-chmod +t sets the sticky bit. Only the file owner or root can delete or rename a file in that directory. Bob's rm prints Operation not permitted and alice-file.txt stays on disk. That is shared directory integrity: teammates can still create files, they cannot wipe each other's work.
+I set the sticky bit with chmod +t. After that bob's rm printed Operation not permitted and the file was still there.
+That is the point. People can still add files. They cannot wipe each other's work.
 
-## What ls should show
-ls -ld /project should have t in the other execute slot, like drwxrwxr-t.
-lowercase t means sticky bit and other-execute are both set.
+## What I saw
+ls -ld /project showed `drwxrwxr-t`.
+The `t` is in the other execute slot. Lowercase t means sticky bit and execute are both on.

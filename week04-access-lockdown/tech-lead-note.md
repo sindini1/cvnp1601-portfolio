@@ -1,11 +1,11 @@
-/project is group-writable for developers and now has three extra controls.
+/project is shared with developers. I added three extra controls instead of opening it with 777.
 
-Sticky bit: chmod +t. Only the file owner or root can delete or rename files inside. Bob cannot remove Alice's work just because the directory is group-writable.
+Sticky bit: chmod +t. Only the file owner or root can delete files in there. bob could not remove alice's file.
 
-SGID: chmod g+s. New files inherit group developers instead of the creator's primary group. That keeps team read access consistent.
+SGID: chmod g+s. New files inherit group developers instead of whoever created them.
 
-ACL: setfacl -m u:carlos:r-x /project. Carlos gets temporary r-x and is not in developers. Revoke later with setfacl -x u:carlos /project. Do not use usermod -aG for a one-week contractor.
+ACL: setfacl -m u:carlos:r-x /project. Carlos gets read and enter for now. He is not in developers. Take it back with setfacl -x u:carlos /project when the week is over.
 
-Final listing should read like drwxrwsr-t+. The + means getfacl is required to see the full access list.
+ls -ld ended at `drwxrwsr-t+`. The `+` means you have to run getfacl to see the full list.
 
-chmod 777 was rejected. That mode drops every boundary for every account on the box, including service accounts.
+777 would have given every account on the box the same write and delete rights as the team.

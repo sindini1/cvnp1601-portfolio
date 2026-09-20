@@ -1,17 +1,17 @@
 # Task 2 notes
 
 ## Octal 750
-chmod 750 ~/deploy.sh
-- 7 = 4+2+1 = rwx for the owner
-- 5 = 4+0+1 = r-x for the group
-- 0 = --- for other
-Owner can read, write, and run the script. Group can read and run it. Other cannot read it, so credentials inside the script stay off the rest of the system.
+I ran chmod 750 on ~/deploy.sh.
+7 means the owner gets rwx.
+5 means the group gets r-x.
+0 means other gets nothing.
+So I can edit and run the script, my group can run it, and nobody else can even read it.
 
 ## Before / after deploy.sh
-touch creates the file with the umask applied. On this VM umask is 0002, so a new file starts at 664 (rw-rw-r--), not 644.
-After chmod 750 the string should be -rwxr-x---.
+touch made the file with my umask. umask is 0002 on this VM, so it started as `-rw-rw-r--`.
+After chmod 750 it was `-rwxr-x---`.
 
 ## /project after chmod and chown
-sudo chmod g+w /project adds group write. That is the w in the group triplet.
-sudo chown $(whoami):developers /project sets owner to sindini and group to developers.
-ls -ld /project should show sindini developers and group write. Sticky bit and SGID are still off at this point.
+sudo chmod g+w /project gave the developers group write.
+sudo chown $(whoami):developers /project made me the owner and kept the group as developers.
+ls -ld showed `drwxrwxr-x 2 sindini developers`.

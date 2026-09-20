@@ -5,7 +5,7 @@ ls -la string
   2-4    owner rwx
   5-7    group rwx
   8-10   other rwx
-  trailing + means an ACL is present. run getfacl.
+  a + on the end means an ACL is there. run getfacl.
 
 octal
   r=4 w=2 x=1
@@ -22,21 +22,22 @@ symbolic
 
 special bits in ls -la
   sticky  t or T   other execute slot    only owner/root can delete
-  SGID    s or S   group execute slot    new files inherit dir group
-  SUID    s or S   owner execute slot    binary runs as file owner
+  SGID    s or S   group execute slot    new files inherit the dir group
+  SUID    s or S   owner execute slot    binary runs as the file owner
   lowercase = special bit AND execute
   uppercase = special bit WITHOUT execute (usually a mistake)
 
 ownership
   chown alice:developers /project
   chgrp developers /project
-  chown -R recurses. verify with ls -ld
+  chown -R goes through subfolders. check with ls -ld
 
 umask
   umask                 print current value
   umask 0022            strip write from group and other
-  file base 666 - 022 = 644
-  dir  base 777 - 022 = 755
+  this VM was 0002      strip write from other only
+  file base 666 - 002 = 664
+  dir  base 777 - 002 = 775
 
 ACL
   getfacl /project
@@ -44,11 +45,10 @@ ACL
   setfacl -d -m g:developers:rw /project
   setfacl -x u:carlos /project
   setfacl -b /project
-  setfacl -R ...
-  mask:: caps named user and named group effective perms, not owner/other
-  default: entries are inherited by new files
+  mask:: caps named user and named group effective perms
+  default: entries get copied onto new files
 
 why not these
   chmod 777             every account gets rwx
-  usermod -aG for a week-long contractor
+  usermod -aG for a one week contractor
   chmod u+s script.sh   kernel ignores SUID on #! files
