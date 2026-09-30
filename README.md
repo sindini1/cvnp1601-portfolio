@@ -11,5 +11,7 @@ Provisioned a Linux user, added targeted group membership, and granted one sudo 
 
 I configured a shared Linux directory with sticky bit, SGID, and ACLs so team access is collaborative without giving unnecessary delete or write rights. I also documented why SUID on a backup script does not grant root.
 
+This script automates nginx installation and service configuration on a new Ubuntu server so a junior sysadmin can produce a consistent, verified setup.
+
 ## AI use
-I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did.
+I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did. For Week 5 I can explain the server-setup.sh verification block (systemctl is-active --quiet and exit 1) without help.
