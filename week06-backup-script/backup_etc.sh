@@ -29,6 +29,7 @@ if tar -czf "$ARCHIVE" /etc 2>/dev/null; then
   log "Backup succeeded: $ARCHIVE"
   # Verification line added after the first commit so Git history shows the change.
   ls -lh "$ARCHIVE"
+log "Archive verified on disk"
 else
   log "ERROR: Backup failed"
   exit 1
