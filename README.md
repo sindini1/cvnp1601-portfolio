@@ -13,5 +13,7 @@ I configured a shared Linux directory with sticky bit, SGID, and ACLs so team ac
 
 This script automates nginx installation and service configuration on a new Ubuntu server so a junior sysadmin can produce a consistent, verified setup.
 
+This script archives /etc, writes timestamped backup evidence, handles failures with a non-zero exit, and keeps an auditable Git history for a sysadmin team.
+
 ## AI use
-I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did. For Week 5 I can explain the server-setup.sh verification block (systemctl is-active --quiet and exit 1) without help.
+I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did. For Week 5 I can explain the server-setup.sh verification block (systemctl is-active --quiet and exit 1) without help. For Week 6 I can explain why the if must test tar directly and not a pipe into tee, and I can walk git init, add, commit, and log without help.
