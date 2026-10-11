@@ -15,5 +15,7 @@ This script automates nginx installation and service configuration on a new Ubun
 
 This script archives /etc, writes timestamped backup evidence, handles failures with a non-zero exit, and keeps an auditable Git history for a sysadmin team.
 
+I hardened a Linux server by testing SSH key access, disabling password login, enabling a default-deny firewall, and verifying least-privilege permissions on scripts and SSH files.
+
 ## AI use
-I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did. For Week 5 I can explain the server-setup.sh verification block (systemctl is-active --quiet and exit 1) without help. For Week 6 I can explain why the if must test tar directly and not a pipe into tee, and I can walk git init, add, commit, and log without help.
+I used AI when I got stuck on setup and writeup structure. I ran every lab command on my VM and the writeups match what I actually did. For Week 5 I can explain the server-setup.sh verification block (systemctl is-active --quiet and exit 1) without help. For Week 6 I can explain why the if must test tar directly and not a pipe into tee, and I can walk git init, add, commit, and log without help. For Week 7 I can explain why key login must be tested before password auth is disabled, why ufw allow ssh comes before ufw enable, and why a home directory mode can break an otherwise correct authorized_keys file.
