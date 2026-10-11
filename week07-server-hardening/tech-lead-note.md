@@ -1,0 +1,5 @@
+I hardened the lab VM in order so I would not lock myself out. First I generated an ed25519 key, installed the public key, and confirmed a second SSH session could log in with the key. Only after that did I back up sshd_config, set PasswordAuthentication no and PubkeyAuthentication yes, and reload ssh instead of restarting it. Reload applies the config without dropping the session I already had open. sshd -T proved the running config, not just the file. passwordauthentication was no and pubkeyauthentication was yes.
+
+Next I set ufw to deny incoming and allow outgoing, allowed ssh, then enabled the firewall. The allow rule had to exist before enable. ufw status verbose showed the firewall active and SSH allowed. I set ~/scripts/harden.sh and ~/.ssh to 700, and authorized_keys to 600, then confirmed with ls -la. find ~ -perm -o+w was the world-writable audit.
+
+What is left for escalation is anything outside this baseline: a nonstandard SSH port, cloud security groups, or a home directory owned by the wrong user. A checklist that only looks at .ssh can miss /home/student, and sshd will refuse the key for that even when the key files are correct.
