@@ -1,0 +1,11 @@
+CVNP1601 Week 7 evidence report
+Ran: Mon Oct 12 2026
+
+FOUND  week1-cheatsheet.txt
+FOUND  week7-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+FOUND  screenshots
+
+Done.
