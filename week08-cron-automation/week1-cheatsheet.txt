@@ -1,0 +1,46 @@
+=== Week 8 Cron Automation ===
+
+cron five-field syntax
+What: minute hour day-of-month month day-of-week
+Example: 0 6 * * 0
+Note: every Sunday at 06:00
+
+crontab -e
+What: edit the current user's crontab
+Example: crontab -e
+
+crontab -l
+What: list the current user's crontab
+Example: crontab -l
+Note: proves the job is scheduled, not that it ran
+
+crontab -r
+What: remove the entire crontab
+Risk: no confirmation prompt. deletes every scheduled job
+
+absolute paths
+What: full path from root
+Example: /home/sindini/scripts/disk_report.sh
+Note: cron does not start in $HOME and does not load your normal PATH
+
+>> append
+What: add output to the end of a file
+Example: script.sh >> /home/sindini/logs/disk_report.log
+Note: keeps history. single > overwrites
+
+2>&1
+What: redirect stderr to the same place as stdout
+Example: ... >> logfile 2>&1
+Note: without it, errors vanish on systems with no cron mail
+
+tail
+What: show the end of a file
+Example: tail -20 ~/logs/disk_report.log
+
+syslog / journalctl
+What: independent proof cron attempted the job
+Example: grep CRON /var/log/syslog | tail -20
+Example: sudo journalctl -u cron.service | tail -20
+
+Automation evidence note
+crontab -l only proves a job is scheduled. The script's own timestamped log proves the script actually ran and produced output. Syslog or journalctl proves the cron daemon attempted the CMD. Both are required for audit evidence.

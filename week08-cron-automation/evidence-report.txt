@@ -1,0 +1,15 @@
+CVNP1601 Week 8 evidence report
+Ran: Sun Oct 19 04:25:00 UTC 2026
+
+FOUND  disk_report.sh
+FOUND  cron-troubleshooting-note.md
+FOUND  week8-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md
+FOUND  week1-cheatsheet.txt
+FOUND  absolute-paths-explanation.md
+FOUND  README.md (repo root)
+MISSING  screenshots
+
+Done.
