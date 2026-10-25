@@ -1,0 +1,15 @@
+-- Journal capture for CVNP1601-W9-009
+-- Captured before successful restart: 2026-10-25 22:25:11 UTC
+-- Source: journalctl -u nginx --no-pager -n 100
+
+Oct 25 22:08:17 cvnp1601-lab systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Oct 25 22:08:17 cvnp1601-lab systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: nginx.service: Deactivated successfully.
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Oct 25 22:23:30 cvnp1601-lab nginx[2112]: 2026/10/25 22:23:30 [emerg] 2112#2112: unknown directive "broken_directive_on_purpose" in /etc/nginx/nginx.conf:6
+Oct 25 22:23:30 cvnp1601-lab nginx[2112]: nginx: configuration file /etc/nginx/nginx.conf test failed
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: nginx.service: Failed with result 'exit-code'.
+Oct 25 22:23:30 cvnp1601-lab systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
