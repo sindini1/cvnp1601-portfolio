@@ -1,0 +1,13 @@
+CVNP1601 Week 9 evidence report
+Ran: Sun Oct 25 2026
+
+FOUND  week1-cheatsheet.txt
+FOUND  week9-diagnosis.md
+FOUND  incident-worklog.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+FOUND  journal capture
+FOUND  screenshots
+
+Done.
