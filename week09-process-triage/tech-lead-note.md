@@ -1,0 +1,5 @@
+The server was hot and the internal site was down. I ranked processes with ps aux --sort=-%cpu and found a bash loop I had started, owned by my account, at high CPU. Owner and command mattered because killing the wrong PID would have hit a real service. I sent SIGTERM with kill, waited, and confirmed with ps that the PID was gone. SIGKILL was not needed.
+
+nginx was a separate failure. I broke the config on purpose, then captured journalctl -u nginx --no-pager -n 100 to a timestamped file under ~/reports before I edited anything. status showed failed. The journal named the syntax error. I fixed the line, ran nginx -t, restarted, and systemctl is-active --quiet nginx printed nginx is up.
+
+What is left is anything that is not a lab typo: a real config that passes nginx -t but fails at runtime, a port already in use, or a worker owned by www-data that a normal user cannot kill. That last case is a permission boundary, not a protected process. Escalate if the journal points at a missing certificate or a change outside the lab VM.
