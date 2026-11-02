@@ -1,0 +1,5 @@
+The server accepted SSH and could not reach outside addresses. I captured ip addr, ip route, and ss -tlnp to a timestamped file before I changed anything. That pre-change file is the proof of the starting state. The interface was up. The failure layer was the default route, not DNS, because a raw IP ping and a hostname ping were checked separately.
+
+On the lab VM the runtime fix was a default route via the lab gateway. ip route add changes the live table only. It is not written to netplan, so a reboot drops it. I verified with ip route show, ping -c 4 8.8.8.8, and ping -c 4 google.com, then captured the same three commands to a post-fix file. SSH stayed on port 22 the whole time.
+
+What remains is persistence. The live route is not durable. The next step is a netplan change if this has to survive a reboot. On the trainee ticket the extra risk is a second default with a lower metric. A route line is not proof it is the one in use. Delete the bad preferred route before you blame DNS or the firewall.
