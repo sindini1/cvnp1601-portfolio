@@ -1,0 +1,13 @@
+CVNP1601 Week 10 evidence report
+Ran: Mon Nov  2 2026
+
+FOUND  week1-cheatsheet.txt
+FOUND  week10-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+FOUND  pre-change capture
+FOUND  post-fix capture
+FOUND  screenshots
+
+Done.
