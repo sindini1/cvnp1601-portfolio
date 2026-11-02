@@ -21,9 +21,9 @@ fi
 Do not put tee on that same line. log() can still use tee -a for messages. If they insist on a pipe, set -o pipefail first so the if sees tar's failure. The assignment wants the direct test, so remove the pipe.
 
 ## 4. Verification
-Check it two ways.
+Check it two ways, and count the log path as its own check.
 
-1. Run bash backup_etc.sh with no sudo. echo $? should be 1 and the log should say ERROR: Backup failed, not Backup succeeded.
-2. Run sudo bash backup_etc.sh. echo $? should be 0, the log should say Backup succeeded, and ls -lh /var/backups/etc should show an archive much bigger than 128 bytes. tar -tzf on that file should list real /etc paths.
+1. Run bash backup_etc.sh with no sudo. Observed: no Backup succeeded line, tar printed Permission denied, exit was non-zero. The same run cannot append to /var/log/backup_etc.log unless that file is already writable by the user. A failed log open is part of the failure evidence, not a second bug.
+2. Run sudo bash backup_etc.sh. Observed: echo $? was 0, the log said Backup succeeded, and ls -lh /var/backups/etc showed an archive much bigger than 128 bytes. tar -tzf on that file listed real /etc paths.
 
 A green log line with a broken archive is worse than a loud failure. An incident responder would trust the success line and restore from a file that never captured the protected configs.
