@@ -1,0 +1,13 @@
+CVNP1601 Week 11 evidence report
+Ran: Sun Nov  8 21:55:00 CST 2026
+
+FOUND  week1-cheatsheet.txt
+FOUND  attack-summary.md
+FOUND  week11-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+FOUND  ranked pipeline capture
+MISSING  screenshots
+
+Done.
