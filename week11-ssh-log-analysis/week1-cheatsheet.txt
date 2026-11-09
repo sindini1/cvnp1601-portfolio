@@ -1,0 +1,32 @@
+Week 11 SSH log analysis
+
+journalctl -u ssh --no-pager -n 100
+journalctl -u sshd --no-pager -n 100
+# some systems use ssh, some use sshd. Check both if one is empty.
+
+ls -la /var/log/auth.log
+sudo tail -50 /var/log/auth.log
+
+grep "Failed password" /var/log/auth.log | head -20
+grep -c "Failed password" /var/log/auth.log
+# -c counts matches instead of printing them
+
+grep -E "Failed password|Invalid user" /var/log/auth.log | head -20
+# -E is extended regex so | works as OR
+
+grep -v "Failed password" /var/log/auth.log | grep "sshd" | head -10
+# -v inverts the match
+
+grep "Failed password" /var/log/auth.log | head -5 | awk '{print NF}'
+grep "Failed password" /var/log/auth.log | head -5 | awk '{for (i=1; i<=NF; i++) print i ":" $i; print "---"}'
+# NF is number of fields. Do not assume the IP is always field 11. Invalid user lines shift it.
+
+# Correct ranked pipeline
+grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -rn | head -10
+
+# Broken (missing first sort)
+grep "Failed password" /var/log/auth.log | awk '{print $11}' | uniq -c | sort -rn | head -10
+# uniq -c only collapses adjacent identical lines. Without the first sort the same IP is not grouped, so every count is 1.
+
+# Frequency count pattern
+sort | uniq -c | sort -rn
