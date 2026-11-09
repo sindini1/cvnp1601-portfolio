@@ -1,0 +1,17 @@
+# Ranked Failed password source IPs from /var/log/auth.log
+# Command: grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -rn | head -10
+# Field 11 verified with awk field loop on sample lines
+
+    372 192.168.1.50
+    148 10.0.0.99
+     17 172.16.4.2
+      3 203.0.113.45
+      1 198.51.100.12
+
+# Broken version without first sort (all counts 1):
+# grep "Failed password" /var/log/auth.log | awk '{print $11}' | uniq -c | sort -rn | head -10
+      1 192.168.1.50
+      1 10.0.0.99
+      1 172.16.4.2
+      1 203.0.113.45
+      1 198.51.100.12
