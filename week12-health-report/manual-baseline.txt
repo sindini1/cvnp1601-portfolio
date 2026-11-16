@@ -1,40 +1,49 @@
-# Sample manual baseline (replace with real capture from the lab VM)
+# Manual health baseline from cvnp1601-lab (sindini)
 
 $ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sda1        20G  4.2G   15G  22% /
-tmpfs           1.9G     0  1.9G   0% /dev/shm
-/dev/sda15      105M  6.1M   99M   6% /boot/efi
+Filesystem                         Size  Used Avail Use% Mounted on
+tmpfs                              387M  1.5M  386M   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   12G  5.5G  5.2G  52% /
+tmpfs                              1.9G     0  1.9G   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+/dev/sda2                          2.0G  200M  1.6G  11% /boot
+tmpfs                              387M   12K  387M   1% /run/user/1000
 
 $ df -i
-Filesystem     Inodes IUsed  IFree IUse% Mounted on
-/dev/sda1     1310720  89234 1221486    7% /
+Filesystem                         Inodes  IUsed   IFree IUse% Mounted on
+tmpfs                              495109    919  494190    1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv  753664 138106  615558   19% /
+tmpfs                              495109      1  495108    1% /dev/shm
+tmpfs                              495109      3  495106    1% /run/lock
+/dev/sda2                          131072    321  130751    1% /boot
+tmpfs                               99021     32   98989    1% /run/user/1000
 
 $ free -h
                total        used        free      shared  buff/cache   available
-Mem:           3.8Gi       412Mi       1.1Gi        12Mi       2.3Gi       3.1Gi
-Swap:          2.0Gi          0B       2.0Gi
+Mem:           3.8Gi       536Mi       3.2Gi       1.5Mi       322Mi       3.3Gi
+Swap:          2.2Gi          0B       2.2Gi
 
 $ uptime
- 06:01:12 up 12 days,  4:22,  1 user,  load average: 0.08, 0.03, 0.01
+ 00:53:33 up 0 min,  1 user,  load average: 1.90, 0.42, 0.14
 
 $ nproc
 2
 
 $ vmstat 1 5
 procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
- 0  0      0 115432  18432 2408124    0    0     4     2   42   68  1  0 99  0  0
- 0  0      0 115400  18432 2408128    0    0     0     0   38   55  0  0 100  0  0
- 0  0      0 115388  18432 2408132    0    0     0     4   41   61  0  1 99  0  0
- 0  0      0 115376  18432 2408140    0    0     0     0   36   52  0  0 100  0  0
- 0  0      0 115364  18432 2408144    0    0     0     0   39   58  0  0 100  0  0
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+ 1  0      0 3311952  19544 310888    0    0 12620   770 2397   15  17 44 38  1  0  0
+ 0  0      0 3314428  19556 311100    0    0     0  1216  236  182   0   1 99  0  0  0
+ 0  0      0 3318228  19556 311100    0    0     0     0    4  218  151   0   0 100  0  0  0
 
 $ ss -tlnp
 State  Recv-Q Send-Q Local Address:Port  Peer Address:Port Process
-LISTEN 0      128          0.0.0.0:22         0.0.0.0:*     users:(("sshd",pid=812,fd=3))
-LISTEN 0      511          0.0.0.0:80         0.0.0.0:*     users:(("nginx",pid=1244,fd=6))
-LISTEN 0      128             [::]:22            [::]:*     users:(("sshd",pid=812,fd=4))
+LISTEN 0      4096       127.0.0.54:53        0.0.0.0:*
+LISTEN 0      4096        0.0.0.0:22         0.0.0.0:*
+LISTEN 0      511         0.0.0.0:80         0.0.0.0:*
+LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*
+LISTEN 0      4096           [::]:22            [::]:*
+LISTEN 0      511            [::]:80            [::]:*
 
 # Interpretation notes
-Skip the first vmstat data line (it is the average since boot). The remaining samples show idle CPU near 100 percent and almost no swap or IO wait. Available memory is 3.1 GiB out of 3.8 GiB, which is the useful number. The free column is lower because Linux is using RAM for cache. Disk Use% is 22 percent. Listening services are ssh and nginx only.
+Skip the first vmstat data line (average since boot). Remaining samples show idle CPU at 99-100 percent and no swap. Available memory is 3.3Gi out of 3.8Gi, which is the useful health number. Root filesystem is at 52 percent Use% and 19 percent inode Use%. Listening services are DNS (53), SSH (22), and HTTP (80).
