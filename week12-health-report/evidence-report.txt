@@ -1,0 +1,15 @@
+CVNP1601 Week 12 evidence report
+Ran: Sun Nov 15 18:50:00 CST 2026
+
+FOUND  health_report.sh
+FOUND  week1-cheatsheet.txt
+FOUND  week12-diagnosis.md
+FOUND  tech-lead-note.md
+FOUND  troubleshooting-narrative.md
+FOUND  README.md (repo root)
+MISSING  health report output
+FOUND  cron evidence
+MISSING  screenshots
+
+Done.
+Note: replace sample baseline and cron-evidence with real captures from the lab VM, add screenshots of the manual run, ls -la, crontab -l, and report header, then re-run collect-evidence.sh.
