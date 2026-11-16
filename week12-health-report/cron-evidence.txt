@@ -1,0 +1,20 @@
+# Final crontab (after any test schedule was removed)
+
+$ crontab -l
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+0 6 * * * /home/student/scripts/health_report.sh >> /home/student/reports/health_cron.log 2>&1
+
+# Sample cron log tail (replace with real capture)
+$ tail -40 ~/reports/health_cron.log
+Report written to /home/student/reports/health_web12_20261115_060001.log
+
+# Sample report header (replace with real capture)
+$ head -20 ~/reports/health_web12_20261115_060001.log
+========================================
+Server Health Report
+Hostname: web12
+Timestamp: 2026-11-15 06:00:01 UTC
+========================================
+
+=== Disk Usage (df -h) ===
+...
