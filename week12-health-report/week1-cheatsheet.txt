@@ -1,0 +1,21 @@
+Week 12 health report standards
+
+Week 5: script header block and WHY comments.
+Evidence: health_report.sh starts with a comment block that states purpose and contains WHY comments on variables, mkdir -p, and the vmstat count.
+
+Week 6: executable permission verified with ls -la.
+Evidence: ls -la ~/scripts/health_report.sh shows -rwx------ or equivalent after chmod 700.
+
+Week 8: timestamped log output for scheduled automation.
+Evidence: each run writes health_HOSTNAME_YYYYMMDD_HHMMSS.log and cron redirects to health_cron.log.
+
+Week 9: journalctl capture before restart.
+Evidence: not applicable to this script (no service restart), but the standard is active for any restart work.
+
+Week 10: network state capture before changes.
+Evidence: not applicable to this script (no network changes), but the standard is active for any routing work.
+
+Week 12: hostname and timestamp in report output header.
+Evidence: the first lines of every report file contain Hostname: and Timestamp: before any metric section.
+
+The script meets the applicable standards because it has a header and WHY comments, is mode 700, writes a uniquely timestamped report file, and places hostname plus timestamp at the top of that file. Cron includes a PATH line and the final schedule is 0 6 * * *. Manual run evidence and the generated report are captured so the automation can be verified independently of the schedule.
