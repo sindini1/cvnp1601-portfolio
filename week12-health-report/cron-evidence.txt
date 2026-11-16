@@ -1,20 +1,45 @@
-# Final crontab (after any test schedule was removed)
+# Final crontab from cvnp1601-lab (sindini)
 
 $ crontab -l
+0 6 * * 0 /home/sindini/scripts/disk_report.sh >> /home/sindini/logs/disk_report_cron.log 2>&1
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-0 6 * * * /home/student/scripts/health_report.sh >> /home/student/reports/health_cron.log 2>&1
+0 6 * * * /home/sindini/scripts/health_report.sh >> /home/sindini/reports/health_cron.log 2>&1
 
-# Sample cron log tail (replace with real capture)
-$ tail -40 ~/reports/health_cron.log
-Report written to /home/student/reports/health_web12_20261115_060001.log
+# Script permissions
+$ ls -la ~/scripts/health_report.sh
+-rwx------ 1 sindini sindini 1671 Nov 16 00:58 /home/sindini/scripts/health_report.sh
 
-# Sample report header (replace with real capture)
-$ head -20 ~/reports/health_web12_20261115_060001.log
+# Manual run result
+$ bash ~/scripts/health_report.sh
+Report written to /home/sindini/reports/health_cvnp1601-lab_20261116_010236.log
+
+# Report listing
+$ ls -la ~/reports/
+-rw-rw-r-- 1 sindini sindini 2607 Nov 16 00:59 health_cvnp1601-lab_20261116_005857.log
+-rw-rw-r-- 1 sindini sindini 2608 Nov 16 01:02 health_cvnp1601-lab_20261116_010236.log
+
+# Report header and sections from newest file
+$ head -40 ~/reports/health_cvnp1601-lab_20261116_010236.log
 ========================================
 Server Health Report
-Hostname: web12
-Timestamp: 2026-11-15 06:00:01 UTC
+Hostname: cvnp1601-lab
+Timestamp: 2026-11-16 01:02:36 UTC
 ========================================
 
 === Disk Usage (df -h) ===
+Filesystem                         Size  Used Avail Use% Mounted on
+tmpfs                              387M  1.5M  386M   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   12G  5.5G  5.2G  52% /
 ...
+
+=== Memory (free -h) ===
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       482Mi       3.2Gi       1.5Mi       341Mi       3.3Gi
+Swap:          2.2Gi          0B       2.2Gi
+
+=== Load and Uptime ===
+ 01:02:36 up 9 min,  1 user,  load average: 0.03, 0.12, 0.09
+CPU cores: 2
+
+=== Listening Services (ss -tlnp) ===
+LISTEN on 127.0.0.54:53, 0.0.0.0:22, 0.0.0.0:80, and IPv6 equivalents
