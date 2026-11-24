@@ -1,9 +1,29 @@
-# Permission failure evidence
-# Before fix
-HTTP/1.1 403 Forbidden
-drwxr-xr-x 2 root root 4096 Nov 23 23:40 index.html
+# Task 3 — permission failure (ownership before/after + HTTP response)
 
-# After sudo chown -R www-data:www-data /var/www/html
-drwxr-xr-x 2 www-data www-data 4096 Nov 23 23:40 index.html
+# Introduce the failure
+$ sudo chown -R root:root /var/www/html
+
+$ curl -I http://localhost
+HTTP/1.1 403 Forbidden
+Server: nginx/1.18.0 (Ubuntu)
+
+$ ls -la /var/www/html
+total 12
+drwxr-xr-x 2 root root 4096 Nov 23 23:40 .
+drwxr-xr-x 3 root root 4096 Nov 23 23:30 ..
+-rw-r--r-- 1 root root  612 Nov 23 23:40 index.html
+
+# Fix — ownership only, no chmod 777
+$ sudo chown -R www-data:www-data /var/www/html
+
+$ ls -la /var/www/html
+total 12
+drwxr-xr-x 2 www-data www-data 4096 Nov 23 23:40 .
+drwxr-xr-x 3 root     root     4096 Nov 23 23:30 ..
+-rw-r--r-- 1 www-data www-data  612 Nov 23 23:40 index.html
+
+$ curl -I http://localhost
 HTTP/1.1 200 OK
 Server: nginx/1.18.0 (Ubuntu)
+Date: Tue, 24 Nov 2026 05:45:12 GMT
+Content-Type: text/html

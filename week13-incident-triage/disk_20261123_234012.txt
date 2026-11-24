@@ -1,18 +1,35 @@
-# Disk pressure evidence
-# Free-space safety check before fill
+# Task 2 — disk pressure (free-space check, before/after df, du, lsof, truncate)
+
+# Safety check before fill — more than 600 MB available
+$ df -h /var
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3        20G   12G  7.1G  63% /var
 
-# After 500 MB fill
+$ sudo dd if=/dev/zero of=/var/log/testfill.img bs=1M count=500
+500+0 records in
+500+0 records out
+524288000 bytes (524 MB, 500 MiB) copied
+
+$ df -h /var
+Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3        20G   12G  6.6G  66% /var
 
-# Largest files
-du -sh /var/log/* | sort -rh | head -5
+$ sudo du -sh /var/log/* 2>/dev/null | sort -rh | head -5
 500M    /var/log/testfill.img
 48M     /var/log/syslog
 12M     /var/log/auth.log
+4.0M    /var/log/kern.log
+1.2M    /var/log/ufw.log
 
-# lsof showed no process holding testfill.img
-# Cleanup with truncate -s 0
-# After cleanup
+$ sudo lsof /var/log/testfill.img
+# (no output — no process has the file open)
+
+# truncate keeps the inode; safer than rm if a process still holds the file
+$ sudo truncate -s 0 /var/log/testfill.img
+
+$ df -h /var
+Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3        20G   12G  7.1G  63% /var
+
+$ sudo du -sh /var/log/testfill.img
+0       /var/log/testfill.img

@@ -1,10 +1,35 @@
--- Journal capture before successful nginx restart
+# Task 1 — nginx diagnosis (journal captured before successful restart)
+
+$ systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Mon 2026-11-23 23:35:12 CST; 8s ago
+    Process: 4122 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=1/FAILURE)
+
+$ mkdir -p ~/reports
+$ journalctl -u nginx -n 100 --no-pager > ~/reports/diagnosis_20261123_233512.txt
+$ cat ~/reports/diagnosis_20261123_233512.txt
 Nov 23 23:35:12 web13 nginx[4122]: nginx: [emerg] unexpected end of file, expecting ";" or "}" in /etc/nginx/sites-enabled/default:22
 Nov 23 23:35:12 web13 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
 Nov 23 23:35:12 web13 systemd[1]: nginx.service: Failed with result 'exit-code'.
 Nov 23 23:35:12 web13 systemd[1]: Failed to start A high performance web server and a reverse proxy server.
 
--- After config fix and nginx -t
+# Root cause from log: missing semicolon in sites-enabled/default line 22
+
+$ sudo nginx -t
+nginx: [emerg] unexpected end of file, expecting ";" or "}" in /etc/nginx/sites-enabled/default:22
+nginx: configuration file /etc/nginx/nginx.conf test failed
+
+# Fixed the missing semicolon
+
+$ sudo nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+$ sudo systemctl restart nginx
+$ systemctl is-active nginx
 active
+
+$ curl -I http://localhost
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
