@@ -1,0 +1,9 @@
+# Permission failure evidence
+# Before fix
+HTTP/1.1 403 Forbidden
+drwxr-xr-x 2 root root 4096 Nov 23 23:40 index.html
+
+# After sudo chown -R www-data:www-data /var/www/html
+drwxr-xr-x 2 www-data www-data 4096 Nov 23 23:40 index.html
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)

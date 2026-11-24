@@ -1,0 +1,29 @@
+Week 13 incident triage standards
+
+Week 5: script header block and WHY comments.
+Evidence: collect-evidence.sh starts with a comment block that states purpose.
+
+Week 6: executable permission verified with ls -la.
+Evidence: ls -la collect-evidence.sh shows execute bit after chmod +x.
+
+Week 8: timestamped log output for scheduled automation.
+Evidence: not applicable this week (no new cron), but the standard remains active.
+
+Week 9: journalctl capture before restart.
+Evidence: diagnosis_*.txt was written from journalctl -u nginx before the successful restart.
+
+Week 10: network state capture before changes.
+Evidence: not applicable this week (no routing changes), but the standard remains active.
+
+Week 12: hostname and timestamp in report output header.
+Evidence: post-incident-report.md opens with Hostname and Timestamp lines.
+
+Week 13 additions:
+- Triage priority rule: service-affecting first, then health degradation, then maintenance. Fix the outage before disk or ownership.
+- One-change-at-a-time rule: verify each fix before the next so the cause of any improvement is known.
+- Exit status codes: 0 success, 1 general failure, 126 command found but not executable, 127 command not found, 137 killed by SIGKILL (128+9), 143 terminated by SIGTERM (128+15).
+- truncate versus rm: truncate -s 0 keeps the inode so a process that still has the file open does not keep writing to a deleted path; rm removes the directory entry. Use lsof first to see who holds the file.
+- lsof purpose: shows which process has a file open so you know whether truncate is safer than rm and whether a restart is required.
+- Post-incident report sections: hostname, timestamp, incident summary, triage order, root cause per symptom, exact fix commands, verification output, and time-to-resolution.
+
+This incident workflow prepares for Docker logs and Ansible deployment evidence in Weeks 14-16 because the same habits apply: capture the real failure output before any restart or redeploy, change one thing at a time, and write a report that names the root cause and the verification instead of saying "fixed it."

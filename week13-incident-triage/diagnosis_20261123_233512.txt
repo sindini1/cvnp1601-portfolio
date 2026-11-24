@@ -1,0 +1,10 @@
+-- Journal capture before successful nginx restart
+Nov 23 23:35:12 web13 nginx[4122]: nginx: [emerg] unexpected end of file, expecting ";" or "}" in /etc/nginx/sites-enabled/default:22
+Nov 23 23:35:12 web13 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 23:35:12 web13 systemd[1]: nginx.service: Failed with result 'exit-code'.
+Nov 23 23:35:12 web13 systemd[1]: Failed to start A high performance web server and a reverse proxy server.
+
+-- After config fix and nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+active

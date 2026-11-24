@@ -1,0 +1,18 @@
+# Disk pressure evidence
+# Free-space safety check before fill
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        20G   12G  7.1G  63% /var
+
+# After 500 MB fill
+/dev/sda3        20G   12G  6.6G  66% /var
+
+# Largest files
+du -sh /var/log/* | sort -rh | head -5
+500M    /var/log/testfill.img
+48M     /var/log/syslog
+12M     /var/log/auth.log
+
+# lsof showed no process holding testfill.img
+# Cleanup with truncate -s 0
+# After cleanup
+/dev/sda3        20G   12G  7.1G  63% /var

@@ -1,0 +1,5 @@
+# Technical Lead Note
+
+Week 13 incident triage on the lab VM followed impact order: nginx outage first, then /var disk pressure, then /var/www/html ownership. The nginx failure was a missing semicolon in sites-enabled/default; journalctl was captured before the successful restart, nginx -t confirmed the fix, and is-active plus a 200 from curl verified it. Disk pressure came from a 500 MB test fill in /var/log; df before and after, du to identify the file, lsof to confirm nothing held it open, then truncate -s 0 returned the space without removing the inode. Ownership was root:root on /var/www/html, producing 403s; chown -R www-data:www-data restored access and a second curl returned 200. No chmod 777 was used.
+
+After returning the server to service I would monitor nginx status and error log for further parse or bind failures, df on /var for growth in /var/log, and ownership on /var/www/html so content stays readable by the worker. The one-change workflow kept each verification tied to a single action, and the journal capture is the evidence the root-cause claim rests on.
