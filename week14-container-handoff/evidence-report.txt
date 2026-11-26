@@ -1,5 +1,5 @@
 CVNP1601 Week 14 evidence report
-Ran: Thu Nov 26 19:55:25 UTC 2026
+Ran: Thu Nov 26 21:05:00 UTC 2026
 
 FOUND  docker-run.txt
 FOUND  week14-diagnosis.md
@@ -7,7 +7,10 @@ FOUND  tech-lead-note.md
 FOUND  troubleshooting-narrative.md
 FOUND  container-handoff.md
 FOUND  README.md
+FOUND  Week 14 - Task 1.png
+FOUND  Week 14 - Task 2.png
+FOUND  Week 14 - Task 3.png
+FOUND  Week 14 - Task 4.png
 MISSING  README.md (repo root)
-MISSING  live capture screenshots or text dumps (recommended)
 
 Done.
